@@ -51,39 +51,20 @@ void solve() {
 
     vin(v, n);
 
-    unordered_map<int, int> mp;
-    FOR(i, 0, n){
-        mp[v[i]]++;
+    vi result;
+
+    result.push_back(v[n - 1]);
+    for(int i = 0; i < n - 1; i++){
+        result.push_back(v[i]);
     }
 
-    if(mp.size() == 1){
+    if(result[0] == result[1]){
         cout<<"NO"<<endl;
         return;
     }
-
-    vi pre_sum(n);
-
-    pre_sum[0] = v[0];
-    FOR(i, 1, n){
-        pre_sum[i] = pre_sum[i - 1] + v[i];
-    }
-
-    bool beautiful = true;
-    FOR(i, 0, n - 1){
-        if(v[i + 1] == pre_sum[i]){
-            beautiful = false;
-        }
-    }
-
-    if(!beautiful){
-        sort(v.begin(), v.end());
-        reverse(v.begin(), v.end());
-        vout(v);
-        return;
-    }
     else{
-        vout(v);
-        return;
+        cout<<"YES"<<endl;
+        vout(result);
     }
 }
 
