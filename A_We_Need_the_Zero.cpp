@@ -46,12 +46,12 @@ const int MAXN = 1e5 + 5; // Adjust as needed
 // ---
 
 void solve() {
-    int n;
+    ll n;
     cin>>n;
 
     vin(v, n);
 
-    int v_xor = 0;
+    ll v_xor = 0;
     FOR(i, 0, n){
         v_xor ^= v[i];
     }

@@ -1,5 +1,5 @@
 // @Author: Gyaneshwer Jha
-// @date: 05-Aug-2025
+// @date: 10-Aug-2025
 
 #define _USE_MATH_DEFINES
 #include <bits/stdc++.h>
@@ -46,27 +46,46 @@ const int MAXN = 1e5 + 5; // Adjust as needed
 // ---
 
 void solve() {
-    ll x1, y1, x2, y2;
-    cin>>x1>>y1>>x2>>y2;
+    long long a, b;
+    cin >> a >> b;
 
-    if(y2 < y1){
-        cout<<"-1"<<endl;
-        return;
+    long long kingX, kingY;
+    cin >> kingX >> kingY;
+
+    long long queenX, queenY;
+    cin >> queenX >> queenY;
+
+    // Use a set to store unique knight positions that can attack the king
+    set<pair<long long, long long>> king_attack_positions;
+
+    long long dx[] = {a, a, -a, -a, b, b, -b, -b};
+    long long dy[] = {b, -b, b, -b, a, -a, a, -a};
+
+    for (int i = 0; i < 8; i++) {
+        king_attack_positions.insert({kingX + dx[i], kingY + dy[i]});
     }
 
-    if(y2 >= y1){
-        ll step = y2 - y1;
-        x1 += step;
-        if(x2 > x1){
-            cout<<"-1"<<endl;
-            return;
-        }
-        else{
-            step += (x1 - x2);
-            cout<<step<<endl;
-            return;
+
+
+    
+    // In the case where a != b, some queen moves might land on the same king-attacking square.
+    // For example, from (queenX, queenY), a move of (+a,+b) could land on the same spot as a move of (+b,+a).
+    // The previous loop would count this twice. To fix this, we need to consider only unique
+    // positions from which the queen can be attacked.
+
+    set<pair<long long, long long>> queen_attack_positions;
+    for(int i = 0; i < 8; ++i) {
+        queen_attack_positions.insert({queenX + dx[i], queenY + dy[i]});
+    }
+
+    int final_count = 0;
+    for(auto const& pos : queen_attack_positions) {
+        if(king_attack_positions.count(pos)) {
+            final_count++;
         }
     }
+
+    cout << final_count << endl;
 }
 
 int main() {

@@ -45,24 +45,17 @@ const int MAXN = 1e5 + 5; // Adjust as needed
 
 // ---
 
-void solve() {
-    int n, k;
-    cin>>n>>k;
 
-    if(n % 2 == 0){
-        cout<<"YES"<<endl;
-        return;
-    }
-    else{
-        if(k % 2 == 0){
-            cout<<"NO"<<endl;
-        }
-        else{
-            cout<<"YES"<<endl;
-        }
+void solve() {
+    long long n, k; 
+    cin >> n >> k;
+
+    if (k % 2 == 0 && n % 2 != 0) {
+        cout << "NO" << endl;
+    } else {
+        cout << "YES" << endl;
     }
 }
-
 int main() {
     fastio;
     int t;
